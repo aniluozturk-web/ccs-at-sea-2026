@@ -1,0 +1,38 @@
+name: Switch to registration-closed site
+
+on:
+  schedule:
+    - cron: '0 22 17 4 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-closed-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Replace root site with updated website/ folder
+        run: |
+          rm -f index.html about.html practical.html programme.html registration.html speakers.html style.css
+          rm -rf assets/
+          cp website/index.html .
+          cp website/about.html .
+          cp website/practical.html .
+          cp website/programme.html .
+          cp website/registration.html .
+          cp website/speakers.html .
+          cp website/style.css .
+          cp -r website/assets/ assets/
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Registration closed — site updated automatically"
+          git push
