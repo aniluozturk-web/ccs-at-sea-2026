@@ -27,6 +27,7 @@ jobs:
           cp website/speakers.html .
           cp website/style.css .
           cp -r website/assets/ assets/
+          rm -rf website/
 
       - name: Commit and push
         run: |
