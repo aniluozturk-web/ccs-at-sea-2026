@@ -216,9 +216,15 @@
         </button>
       </form>
 
-      <div class="success-msg" id="form-success">
+      <div class="success-msg" id="form-success-yes" style="display:none;">
         <p class="check">Thank you</p>
-        <p class="detail">Your response has been recorded. We look forward to seeing you in Lund.</p>
+        <p class="detail">Your response has been recorded. We look forward to welcoming you in Lund.</p>
+        <p class="detail" style="margin-top: 12px; font-size: 0.84rem; color: #999;">Please note that you will not receive a confirmation email. If you have any questions, please contact <a href="mailto:anil.ozturk@jur.lu.se" style="color: var(--teal);">anil.ozturk@jur.lu.se</a>.</p>
+      </div>
+      <div class="success-msg" id="form-success-no" style="display:none;">
+        <p class="check">Thank you</p>
+        <p class="detail">We are sorry to hear you will not be able to join us. Your response has been recorded.</p>
+        <p class="detail" style="margin-top: 12px; font-size: 0.84rem; color: #999;">Should your plans change, please do not hesitate to get in touch at <a href="mailto:anil.ozturk@jur.lu.se" style="color: var(--teal);">anil.ozturk@jur.lu.se</a>.</p>
       </div>
     </div>
   </div>
@@ -236,17 +242,23 @@
 
 <script>
 const form = document.getElementById('confirm-form');
-const successMsg = document.getElementById('form-success');
+const successYes = document.getElementById('form-success-yes');
+const successNo = document.getElementById('form-success-no');
 form.addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = form.querySelector('.form-submit');
+  const attendance = document.getElementById('attendance').value;
+  const isDecline = (attendance === 'no');
   btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none'; btn.textContent = 'Submitting\u2026';
   fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
   .then(r => {
     if (r.ok) {
       form.style.opacity = '0'; form.style.transform = 'translateY(-10px)';
       form.style.transition = 'opacity 0.4s, transform 0.4s';
-      setTimeout(() => { form.style.display = 'none'; successMsg.style.display = 'block'; }, 420);
+      setTimeout(() => {
+        form.style.display = 'none';
+        if (isDecline) { successNo.style.display = 'block'; } else { successYes.style.display = 'block'; }
+      }, 420);
     } else { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Confirm Attendance'; alert('Something went wrong. Please email anil.ozturk@jur.lu.se.'); }
   })
   .catch(() => { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Confirm Attendance'; alert('Something went wrong. Please email anil.ozturk@jur.lu.se.'); });
