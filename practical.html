@@ -21,7 +21,7 @@
       <a href="speakers.html">Speakers</a>
       <a href="practical.html" class="active">Practical</a>
       <a href="about.html">About</a>
-      <a href="registration.html" class="nav-cta">Register</a>
+      <a href="registration.html" class="nav-cta">Enquiry</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -35,7 +35,7 @@
   <a href="speakers.html">Speakers</a>
   <a href="practical.html">Practical</a>
   <a href="about.html">About</a>
-  <a href="registration.html">Register</a>
+  <a href="registration.html">Enquiry</a>
 </div>
 
 <!-- PAGE HEADER -->
@@ -293,7 +293,7 @@
         <ul>
           <li><a href="programme.html">Programme</a></li>
           <li><a href="speakers.html">Speakers</a></li>
-          <li><a href="registration.html">Registration</a></li>
+          <li><a href="practical.html">Practical Info</a></li>
           <li><a href="practical.html">Practical Info</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -359,222 +359,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
-<!-- COUNTDOWN BANNER -->
-<div class="cd-banner" id="cd-banner">
-  <div class="cd-bg"></div>
-  <div class="cd-shimmer-top"></div>
-  <div class="cd-glow-left"></div>
-  <div class="cd-glow-right"></div>
-  <div class="cd-inner">
-    <div class="cd-urgency">
-      <div class="cd-pulse-ring"><div class="cd-pulse-dot"></div></div>
-      <span class="cd-live">Live</span>
-    </div>
-    <div class="cd-message">
-      <span class="cd-msg-main">Registration closes in</span>
-    </div>
-    <div class="cd-clock" id="cd-clock">
-      <div class="cd-digit-group">
-        <div class="cd-digit-box"><span class="cd-digit" id="cd-d">00</span></div>
-        <span class="cd-digit-label">Days</span>
-      </div>
-      <span class="cd-colon">:</span>
-      <div class="cd-digit-group">
-        <div class="cd-digit-box"><span class="cd-digit" id="cd-h">00</span></div>
-        <span class="cd-digit-label">Hours</span>
-      </div>
-      <span class="cd-colon">:</span>
-      <div class="cd-digit-group">
-        <div class="cd-digit-box"><span class="cd-digit" id="cd-m">00</span></div>
-        <span class="cd-digit-label">Min</span>
-      </div>
-      <span class="cd-colon">:</span>
-      <div class="cd-digit-group">
-        <div class="cd-digit-box cd-digit-box-sec"><span class="cd-digit cd-digit-sec" id="cd-s">00</span></div>
-        <span class="cd-digit-label">Sec</span>
-      </div>
-    </div>
-    <a href="registration.html" class="cd-btn">
-      <span>Register Now</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</div>
-
-<style>
-  .cd-banner {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-    height: 110px; overflow: hidden;
-    box-shadow: 0 -4px 80px rgba(0,0,0,0.6), 0 -1px 0 rgba(184,154,62,0.4);
-    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.8s;
-  }
-  .cd-banner.hidden { transform: translateY(100%); opacity: 0; pointer-events: none; }
-
-  .cd-bg {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, #040a14 0%, #0b1d33 30%, #0f2540 60%, #0b1d33 100%);
-  }
-  .cd-bg::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(27,138,138,0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 50%, rgba(184,154,62,0.12) 0%, transparent 50%);
-    animation: cdBgPulse 4s ease-in-out infinite;
-  }
-  @keyframes cdBgPulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
-
-  .cd-shimmer-top {
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, #b89a3e 15%, #d4ba5e 30%, #fff 50%, #d4ba5e 70%, #b89a3e 85%, transparent);
-    background-size: 300% 100%;
-    animation: cdShine 2.5s linear infinite;
-  }
-  @keyframes cdShine { 0% { background-position: 300% 0; } 100% { background-position: -300% 0; } }
-
-  .cd-glow-left, .cd-glow-right {
-    position: absolute; top: -40px; width: 200px; height: 200px; border-radius: 50%;
-    filter: blur(60px); pointer-events: none;
-    animation: cdGlowPulse 3s ease-in-out infinite;
-  }
-  .cd-glow-left { left: 10%; background: rgba(27,138,138,0.15); }
-  .cd-glow-right { right: 10%; background: rgba(184,154,62,0.15); animation-delay: 1.5s; }
-  @keyframes cdGlowPulse { 0%,100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.2); } }
-
-  .cd-inner {
-    position: relative; z-index: 1;
-    max-width: 1200px; margin: 0 auto; height: 100%;
-    display: flex; align-items: center; justify-content: center; gap: 32px;
-    padding: 0 32px;
-  }
-
-  .cd-urgency { display: flex; align-items: center; gap: 10px; }
-  .cd-pulse-ring {
-    width: 24px; height: 24px; border-radius: 50%;
-    border: 1.5px solid rgba(224,64,64,0.3);
-    display: flex; align-items: center; justify-content: center;
-    animation: cdRingPulse 2s ease-in-out infinite;
-  }
-  .cd-pulse-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: #e04040;
-    box-shadow: 0 0 14px rgba(224,64,64,0.9), 0 0 40px rgba(224,64,64,0.4), 0 0 60px rgba(224,64,64,0.15);
-    animation: cdDotPulse 1s ease-in-out infinite;
-  }
-  @keyframes cdRingPulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 0.1; } }
-  @keyframes cdDotPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } }
-  .cd-live {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
-    color: #e04040;
-    animation: cdLivePulse 1.5s ease-in-out infinite;
-  }
-  @keyframes cdLivePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-  .cd-message { display: flex; flex-direction: column; }
-  .cd-msg-main {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.4rem; font-weight: 600; font-style: italic;
-    color: rgba(255,255,255,0.9);
-    white-space: nowrap;
-    text-shadow: 0 0 30px rgba(184,154,62,0.15);
-  }
-
-  .cd-clock { display: flex; align-items: center; gap: 8px; }
-  .cd-digit-group { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-  .cd-digit-box {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(184,154,62,0.25);
-    border-radius: 12px; padding: 8px 14px;
-    min-width: 72px; text-align: center;
-    backdrop-filter: blur(8px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(184,154,62,0.05);
-    animation: cdBoxGlow 4s ease-in-out infinite;
-  }
-  @keyframes cdBoxGlow { 0%,100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.4), 0 0 20px rgba(184,154,62,0.05); } 50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.4), 0 0 30px rgba(184,154,62,0.15); } }
-
-  .cd-digit-box-sec {
-    border-color: rgba(224,64,64,0.2);
-    animation: cdSecPulse 1s ease-in-out infinite;
-  }
-  @keyframes cdSecPulse { 0%,100% { border-color: rgba(224,64,64,0.2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.4), 0 0 15px rgba(224,64,64,0.05); } 50% { border-color: rgba(224,64,64,0.4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.4), 0 0 25px rgba(224,64,64,0.12); } }
-
-  .cd-digit {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.8rem; font-weight: 500; letter-spacing: 0.05em;
-    color: #fff; line-height: 1;
-    text-shadow: 0 0 24px rgba(184,154,62,0.25), 0 0 60px rgba(184,154,62,0.08);
-  }
-  .cd-digit-sec {
-    color: rgba(255,255,255,0.95);
-    text-shadow: 0 0 20px rgba(224,64,64,0.2);
-  }
-  .cd-digit-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(184,154,62,0.55);
-  }
-  .cd-colon {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.2rem; color: rgba(184,154,62,0.3);
-    padding-bottom: 20px;
-    animation: cdBlink 1s step-end infinite;
-  }
-  @keyframes cdBlink { 0%,100% { opacity:1; } 50% { opacity:0.08; } }
-
-  .cd-btn {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.84rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-    color: #0b1d33; text-decoration: none;
-    background: linear-gradient(135deg, #d4ba5e, #b89a3e);
-    padding: 15px 32px; border-radius: 10px;
-    white-space: nowrap;
-    transition: transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 4px 24px rgba(184,154,62,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
-    animation: cdBtnGlow 3s ease-in-out infinite;
-  }
-  @keyframes cdBtnGlow { 0%,100% { box-shadow: 0 4px 24px rgba(184,154,62,0.4), inset 0 1px 0 rgba(255,255,255,0.3); } 50% { box-shadow: 0 6px 36px rgba(184,154,62,0.6), inset 0 1px 0 rgba(255,255,255,0.3); } }
-  .cd-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(184,154,62,0.6); }
-
-  body { padding-bottom: 120px !important; }
-
-  @media (max-width: 900px) {
-    .cd-banner { height: auto; }
-    .cd-inner { flex-wrap: wrap; gap: 12px; padding: 18px 20px; justify-content: center; }
-    .cd-urgency { display: none; }
-    .cd-message { display: none; }
-    .cd-digit-box { min-width: 54px; padding: 6px 10px; }
-    .cd-digit { font-size: 1.9rem; }
-    .cd-colon { font-size: 1.5rem; padding-bottom: 14px; }
-    .cd-btn { width: 100%; justify-content: center; padding: 13px 24px; }
-    body { padding-bottom: 140px !important; }
-  }
-</style>
-
-<script>
-(function(){
-  var deadline=new Date('2026-04-17T23:59:00+02:00').getTime();
-  var banner=document.getElementById('cd-banner');
-  if(!banner)return;
-  var dE=document.getElementById('cd-d'),hE=document.getElementById('cd-h'),
-      mE=document.getElementById('cd-m'),sE=document.getElementById('cd-s');
-  function p(n){return n<10?'0'+n:n;}
-  var prev=-1;
-  function tick(){
-    var diff=deadline-Date.now();
-    if(diff<=0){banner.classList.add('hidden');document.body.style.paddingBottom='0';return;}
-    var s=Math.floor((diff%6e4)/1e3);
-    dE.textContent=p(Math.floor(diff/864e5));
-    hE.textContent=p(Math.floor((diff%864e5)/36e5));
-    mE.textContent=p(Math.floor((diff%36e5)/6e4));
-    if(s!==prev){sE.textContent=p(s);sE.style.transform='scale(1.08)';sE.style.transition='none';
-      setTimeout(function(){sE.style.transition='transform 0.3s';sE.style.transform='scale(1)';},50);prev=s;}
-    requestAnimationFrame(tick);
-  }
-  tick();
-})();
 </script>
 
 </body>
