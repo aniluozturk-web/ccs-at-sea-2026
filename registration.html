@@ -146,7 +146,7 @@
       <div id="form-success" style="display: none; margin-top: 24px; padding: 20px; border-radius: 12px; background: rgba(27, 138, 138, 0.06); border: 1px solid rgba(27, 138, 138, 0.15);">
         <p style="font-size: 0.92rem; color: var(--navy); font-weight: 500; margin-bottom: 4px;">Enquiry received.</p>
         <p style="font-size: 0.84rem; color: var(--text-body); margin: 0;">Thank you for getting in touch. Your response has been recorded.</p>
-        <p style="font-size: 0.8rem; color: #999; margin-top: 10px;">Please note that you will not receive a confirmation email. We will respond to your enquiry as soon as possible. If you have any questions, please contact <a href="mailto:anil.ozturk@jur.lu.se" style="color: var(--teal);">anil.ozturk@jur.lu.se</a>.</p>
+        <p style="font-size: 0.8rem; color: #999; margin-top: 10px;">Please note that you will not receive a confirmation email. We will respond to your enquiry as soon as possible. If you have any questions, please use the <a href="registration.html" style="color: inherit;">contact form</a>.</p>
       </div>
     </div>
 
@@ -188,7 +188,7 @@
 
       <div class="reg-info-card">
         <h3>Contact</h3>
-        <p>For urgent matters, you can also reach us directly at <a href="mailto:anil.ozturk@jur.lu.se" style="color: var(--teal); text-decoration: none; font-weight: 500;">anil.ozturk@jur.lu.se</a>.</p>
+        <p>For urgent matters, you can also reach us via the contact form above.</p>
       </div>
 
     </div>
@@ -216,7 +216,7 @@
       </div>
       <div class="footer-col footer-contact">
         <h3>Contact</h3>
-        <p><a href="mailto:anil.ozturk@jur.lu.se">anil.ozturk@jur.lu.se</a></p>
+        <p><a href="registration.html">Contact Form</a></p>
         <p>Faculty of Law<br>Lund University<br>Sweden</p>
       </div>
     </div>
@@ -284,10 +284,10 @@ form.addEventListener('submit', function(e) {
       form.style.display = 'none';
       successMsg.style.display = 'block';
     } else {
-      alert('There was an error sending your enquiry. Please try again or email anil.ozturk@jur.lu.se directly.');
+      alert('There was an error sending your enquiry. Please try again or use the contact form on the website.');
     }
   }).catch(() => {
-    alert('There was an error sending your enquiry. Please try again or email anil.ozturk@jur.lu.se directly.');
+    alert('There was an error sending your enquiry. Please try again or use the contact form on the website.');
   });
 });
 </script>

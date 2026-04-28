@@ -132,13 +132,13 @@
       <div class="success-msg" id="form-success" style="display:none;">
         <p class="check">Registration Received</p>
         <p class="detail">Thank you. We look forward to seeing you at the conference.</p>
-        <p class="detail" style="margin-top: 12px; font-size: 0.84rem; color: #999;">Questions? <a href="mailto:anil.ozturk@jur.lu.se" style="color: var(--teal);">anil.ozturk@jur.lu.se</a></p>
+        <p class="detail" style="margin-top: 12px; font-size: 0.84rem; color: #999;">Questions? <a href="registration.html">Use our contact form</a></p>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <p>Questions? <a href="mailto:anil.ozturk@jur.lu.se">anil.ozturk@jur.lu.se</a> &middot; <a href="https://ccsatsea2026.com">ccsatsea2026.com</a></p>
+    <p>Questions? <a href="registration.html">Use our contact form</a> · <a href="https://ccsatsea2026.com">ccsatsea2026.com</a></p>
   </div>
 
 </div>
@@ -155,9 +155,9 @@ form.addEventListener('submit', function(e) {
     if (r.ok) {
       form.style.opacity = '0'; form.style.transform = 'translateY(-10px)'; form.style.transition = 'opacity 0.4s, transform 0.4s';
       setTimeout(() => { form.style.display = 'none'; success.style.display = 'block'; }, 420);
-    } else { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Register'; alert('Something went wrong. Please email anil.ozturk@jur.lu.se.'); }
+    } else { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Register'; alert('Something went wrong. Please use the contact form on the website.'); }
   })
-  .catch(() => { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Register'; alert('Something went wrong. Please email anil.ozturk@jur.lu.se.'); });
+  .catch(() => { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.textContent = 'Register'; alert('Something went wrong. Please use the contact form on the website.'); });
 });
 </script>
 </body>
