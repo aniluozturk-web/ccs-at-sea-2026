@@ -61,7 +61,7 @@
           <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); font-weight: 500;">Registration Status</span>
         </div>
         <p style="font-size: 0.92rem; color: var(--navy); font-weight: 500; margin-bottom: 4px;">Registration has closed, but you are still welcome to attend.</p>
-        <p style="font-size: 0.84rem; color: var(--text-body); margin: 0; line-height: 1.6;">Please see the sidebar for details on late attendance. For late registration or any other questions, use the form below.</p>
+        <p style="font-size: 0.84rem; color: var(--text-body); margin: 0; line-height: 1.6;">Please note that lunch, fika, and conference materials cannot be guaranteed for late registrants. For late registration or any other questions, use the form below.</p>
       </div>
 
       <h2>Get in Touch</h2>
@@ -105,15 +105,6 @@
         <!-- Conditional: dietary + participation for late reg -->
         <div id="late-reg-fields" style="display: none;">
           <div class="form-group">
-            <label class="form-label" for="role">Participation type *</label>
-            <select class="form-select" id="role" name="participation_type">
-              <option value="" disabled selected>Select your role</option>
-              <option value="presenter">Presenter</option>
-              <option value="participant">Participant (non-presenting)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
             <label class="form-label" for="dietary">Dietary requirements <span class="form-label-optional">(optional)</span></label>
             <select class="form-select" id="dietary" name="dietary_requirements">
               <option value="none" selected>No specific requirements</option>
@@ -146,7 +137,7 @@
       <div id="form-success" style="display: none; margin-top: 24px; padding: 20px; border-radius: 12px; background: rgba(27, 138, 138, 0.06); border: 1px solid rgba(27, 138, 138, 0.15);">
         <p style="font-size: 0.92rem; color: var(--navy); font-weight: 500; margin-bottom: 4px;">Enquiry received.</p>
         <p style="font-size: 0.84rem; color: var(--text-body); margin: 0;">Thank you for getting in touch. Your response has been recorded.</p>
-        <p style="font-size: 0.8rem; color: #999; margin-top: 10px;">Please note that you will not receive a confirmation email. We will respond to your enquiry as soon as possible. If you have any questions, please use the <a href="registration.html" style="color: inherit;">contact form</a>.</p>
+        <p style="font-size: 0.8rem; color: #999; margin-top: 10px;">Please note that you will not receive a confirmation email. We will respond to your enquiry as soon as possible.</p>
       </div>
     </div>
 
@@ -154,41 +145,20 @@
     <div class="reg-sidebar reveal">
 
       <div class="reg-info-card">
-        <span class="reg-info-highlight">No registration fee</span>
-        <h3>Registered participants</h3>
-        <ul class="reg-info-list">
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Conference attendance (both days)
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Coffee breaks and fika
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Lunch on both conference days
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            Conference materials
-          </li>
-        </ul>
+        <h3>Conference details</h3>
+        <p><strong>Dates:</strong> 7–8 May 2026</p>
+        <p><strong>Venue:</strong> Faculty of Law, Lund University</p>
+        <p><strong>Fee:</strong> None</p>
       </div>
 
       <div class="reg-info-card" style="border-left: 3px solid var(--gold); background: rgba(201, 168, 76, 0.04);">
-        <h3>Late registration</h3>
-        <p>You are welcome to attend, but please note that lunch, fika, and conference materials cannot be guaranteed for late registrants, as catering and materials have been arranged based on confirmed registrations.</p>
+        <h3>Late attendance</h3>
+        <p>Lunch, fika, and conference materials cannot be guaranteed for late registrants, as catering and materials have been arranged based on confirmed registrations.</p>
       </div>
 
       <div class="reg-info-card">
         <h3>Participants' responsibility</h3>
-        <p>Travel arrangements and accommodation are the responsibility of each participant. For guidance on getting to Lund and suggested areas to stay, please see the <a href="practical.html" style="color: var(--teal); text-decoration: none; font-weight: 500;">practical information</a> page.</p>
-      </div>
-
-      <div class="reg-info-card">
-        <h3>Contact</h3>
-        <p>For urgent matters, you can also reach us via the contact form above.</p>
+        <p>Travel arrangements and accommodation are the responsibility of each participant. See the <a href="practical.html" style="color: var(--teal); text-decoration: none; font-weight: 500;">practical information</a> page for guidance.</p>
       </div>
 
     </div>
@@ -216,7 +186,6 @@
       </div>
       <div class="footer-col footer-contact">
         <h3>Contact</h3>
-        <p><a href="registration.html">Contact Form</a></p>
         <p>Faculty of Law<br>Lund University<br>Sweden</p>
       </div>
     </div>
@@ -260,10 +229,8 @@ const lateRegFields = document.getElementById('late-reg-fields');
 enquiryType.addEventListener('change', function() {
   if (this.value === 'late_registration') {
     lateRegFields.style.display = 'block';
-    document.getElementById('role').required = true;
   } else {
     lateRegFields.style.display = 'none';
-    document.getElementById('role').required = false;
   }
 });
 
