@@ -36,6 +36,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -2482,40 +2483,68 @@ nav, .nav-links, .nav-logo, .hero-content, .sec-label,
   }
 }
 
+@media (max-width: 768px) {
+  /* Kill justified text on narrow screens -- it creates ugly rivers */
+  body { text-align: left; }
+  .team-bio { text-align: left; }
+
+  /* Prevent iOS zoom on form focus (requires >= 16px) */
+  .form-input, .form-select, .form-textarea { font-size: 1rem; }
+
+  /* Better touch targets for accordions */
+  .accordion-header { padding: 18px 18px; min-height: 60px; }
+  .accordion-body { padding: 0 18px; }
+  .accordion.open .accordion-body { padding: 0 18px 20px; }
+  .accordion-header-left { gap: 12px; }
+  .accordion-title { font-size: 1.05rem; }
+  .panel-num { width: 34px; height: 34px; font-size: 11px; }
+
+  /* Tighter card padding */
+  .info-block { padding: 24px 20px; }
+  .travel-route { padding: 22px 20px; }
+  .info-tile { padding: 20px 18px; }
+  .links-grouped .link-group-label { padding: 14px 20px 0; }
+  .link-row { padding: 12px 20px; }
+  .speakers-note { padding: 20px 24px; }
+  .speaker-card { padding: 24px 20px; }
+  .about-project-card { padding: 24px 20px; }
+
+  /* Programme break items */
+  .programme-break { padding: 12px 16px; gap: 10px; }
+
+  /* Talk list */
+  .talk-list li { padding: 10px 14px; }
+
+  /* Footer */
+  .site-footer { padding: 48px 20px 32px; }
+  .footer-bottom { font-size: 0.65rem; line-height: 1.6; }
+  .footer-logo-group img { height: 38px; }
+  .mmw-logo { height: 26px !important; }
+}
+
 @media (max-width: 500px) {
-  .nav-logo {
-    font-size: 1.3rem;
-  }
+  .nav-logo { font-size: 1.3rem; }
+  .nav-inner { padding: 0 16px; }
+  .mobile-menu { padding: 16px 20px; }
+  .mobile-menu a { font-size: 1rem; padding: 12px 0; }
 
   .hero {
     padding: 90px 16px 50px;
     min-height: auto;
   }
 
-  .hero h1 {
-    font-size: clamp(1.6rem, 5vw, 2.4rem);
-  }
+  .hero h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .hero-badge { font-size: 0.65rem; padding: 6px 12px; }
+  .hero-sub { font-size: 1rem; margin-bottom: 28px; }
+  .hero-meta-item { font-size: 0.88rem; }
 
-  .hero-badge {
-    font-size: 0.65rem;
-    padding: 6px 12px;
-  }
+  .section { padding: 44px 16px; }
+  .section-dark { padding: 50px 0; }
+  .section-dark .section-inner { padding: 0 16px; }
 
-  .section {
-    padding: 50px 16px;
-  }
-
-  .sec-label {
-    font-size: 10px;
-  }
-
-  .sec-title {
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
-  }
-
-  .sec-desc {
-    font-size: 0.88rem;
-  }
+  .sec-label { font-size: 10px; }
+  .sec-title { font-size: clamp(1.4rem, 4vw, 1.8rem); }
+  .sec-desc { font-size: 0.88rem; }
 
   .hero-actions {
     flex-direction: column;
@@ -2527,17 +2556,54 @@ nav, .nav-links, .nav-logo, .hero-content, .sec-label,
     justify-content: center;
   }
 
-  .themes-grid {
-    grid-template-columns: 1fr;
-  }
+  .themes-grid { grid-template-columns: 1fr; }
+  .theme-card { padding: 18px 16px; }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
+  .page-header { padding: 110px 16px 36px; }
+  .page-header-sub { font-size: 0.88rem; }
 
-  .footer-logos {
-    flex-direction: column;
-    gap: 16px;
-  }
+  /* Programme */
+  .schedule-block { padding: 16px 0; }
+  .day-header { margin-bottom: 20px; padding-bottom: 14px; }
+
+  /* Practical */
+  .info-block { padding: 20px 16px; }
+  .info-block-title { font-size: 1.25rem; }
+  .travel-route { padding: 18px 16px; }
+  .route-title { font-size: 1.1rem; }
+  .venue-text { padding: 24px 20px; }
+  .venue-map { min-height: 220px; }
+
+  /* Speakers */
+  .speaker-avatar { width: 64px; height: 64px; }
+  .speaker-avatar span { font-size: 1.2rem; }
+  .speaker-name { font-size: 1.25rem; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-col h3 { font-size: 1.1rem; margin-bottom: 10px; }
+  .site-footer { padding: 40px 16px 28px; }
+  .footer-logos { padding: 18px 20px; border-radius: 10px; flex-direction: column; gap: 14px; }
+  .footer-logo-group img { height: 34px; }
+  .mmw-logo { height: 22px !important; }
+  .footer-bottom { font-size: 0.6rem; letter-spacing: 0.3px; }
+
+  /* About */
+  .team-card { padding: 20px 18px; gap: 14px; }
+  .team-initials { width: 44px; height: 44px; font-size: 1rem; border-radius: 12px; }
+  .team-name { font-size: 1.1rem; }
+  .about-bottom-card { padding: 24px 20px; }
+}
+
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.6rem; }
+  .hero-badge { font-size: 0.6rem; padding: 5px 10px; margin-bottom: 24px; }
+  .hero-sub { font-size: 0.9rem; }
+  .section { padding: 36px 14px; }
+  .btn { padding: 11px 18px; font-size: 0.85rem; }
+  .accordion-header { padding: 14px 14px; }
+  .accordion-title { font-size: 0.95rem; }
+  .info-block { padding: 18px 14px; }
+  .speaker-card { padding: 18px 16px; }
+  .page-header { padding: 100px 14px 30px; }
 }
