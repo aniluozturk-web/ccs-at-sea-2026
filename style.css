@@ -340,6 +340,70 @@ nav, .nav-links, .nav-logo, .hero-content, .sec-label,
   }
 }
 
+/* ─── Hero "In Progress" banner ─── */
+.hero-status-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 36px);
+  margin-bottom: 36px;
+  padding: 18px clamp(28px, 5vw, 56px);
+  border: 1.5px solid rgba(46, 196, 182, 0.45);
+  border-radius: 4px;
+  background: rgba(46, 196, 182, 0.06);
+  animation: heroStatusBlink 2.4s ease-in-out infinite;
+  box-shadow: 0 0 32px rgba(46, 196, 182, 0.08);
+}
+
+.hero-status-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  letter-spacing: 0.02em;
+  color: var(--teal-light);
+  white-space: nowrap;
+}
+
+.hero-status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--teal-light);
+  box-shadow: 0 0 14px var(--teal-light);
+  flex-shrink: 0;
+  animation: heroStatusDot 1.4s ease-in-out infinite;
+}
+
+@keyframes heroStatusBlink {
+  0%, 100% {
+    background: rgba(46, 196, 182, 0.06);
+    border-color: rgba(46, 196, 182, 0.45);
+    box-shadow: 0 0 32px rgba(46, 196, 182, 0.08);
+  }
+  50% {
+    background: rgba(46, 196, 182, 0.14);
+    border-color: rgba(46, 196, 182, 0.75);
+    box-shadow: 0 0 48px rgba(46, 196, 182, 0.18);
+  }
+}
+
+@keyframes heroStatusDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+@media (max-width: 600px) {
+  .hero-status-banner {
+    padding: 14px 22px;
+    gap: 16px;
+  }
+  .hero-status-dot {
+    width: 9px;
+    height: 9px;
+  }
+}
+
 .hero h1 {
   font-size: clamp(2.4rem, 8vw, 4.2rem);
   color: var(--white);
@@ -938,6 +1002,46 @@ nav, .nav-links, .nav-logo, .hero-content, .sec-label,
   font-size: 0.6rem;
   letter-spacing: 0.5px;
   color: var(--text-muted);
+}
+
+.panel-chair {
+  margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.panel-chair-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: rgba(27, 138, 138, 0.07);
+  padding: 3px 9px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.panel-chair-people {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.panel-chair-person {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.panel-chair-name {
+  font-weight: 600;
+  color: var(--navy);
+}
+.panel-chair-affiliation {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 6px;
 }
 
 .break-time {
