@@ -2711,3 +2711,102 @@ nav, .nav-links, .nav-logo, .hero-content, .sec-label,
   .speaker-card { padding: 18px 16px; }
   .page-header { padding: 100px 14px 30px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POST-DAY-1 STATE — concluded sessions are softly dimmed, no checklist UI
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --done-burgundy: #7a2b2b;
+  --done-burgundy-light: #b85454;
+}
+
+/* Day-header: a single, quiet italic mark beside the date */
+.day-header.done {
+  border-bottom-color: rgba(122, 43, 43, 0.35);
+}
+
+.day-header.done .day-badge {
+  background: var(--done-burgundy);
+}
+
+.day-concluded-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--done-burgundy);
+  margin-left: 10px;
+  letter-spacing: 0.01em;
+}
+
+/* Concluded items — uniform soft dim, no strikethrough, no badges */
+.programme-break.done {
+  opacity: 0.5;
+  background: linear-gradient(135deg, rgba(122, 43, 43, 0.035), rgba(122, 43, 43, 0.015));
+  border-color: rgba(122, 43, 43, 0.14);
+  transition: opacity 0.25s ease;
+}
+
+.programme-break.done:hover {
+  opacity: 0.85;
+}
+
+.accordion.done {
+  opacity: 0.55;
+  background: rgba(122, 43, 43, 0.012);
+  border-color: rgba(122, 43, 43, 0.14);
+  transition: opacity 0.25s ease;
+}
+
+.accordion.done:hover {
+  opacity: 0.92;
+}
+
+/* Subtle palette nudge inside completed accordions — panel number tinted burgundy */
+.accordion.done .panel-num {
+  background: var(--done-burgundy) !important;
+  color: var(--white) !important;
+}
+
+.accordion.done .accordion-header[style*="border-left"] {
+  border-left-color: var(--done-burgundy) !important;
+}
+
+/* Hero status banner — Day 2 Tomorrow variant (burgundy palette pulled from 04) */
+.hero-status-banner.day1-complete {
+  border-color: rgba(184, 84, 84, 0.5);
+  background: rgba(122, 43, 43, 0.07);
+  box-shadow: 0 0 32px rgba(122, 43, 43, 0.10);
+  animation: heroStatusBlinkBurgundy 2.4s ease-in-out infinite;
+}
+
+.hero-status-banner.day1-complete .hero-status-text {
+  color: #e6a4a4;
+}
+
+.hero-status-banner.day1-complete .hero-status-dot {
+  background: #e6a4a4;
+  box-shadow: 0 0 14px #e6a4a4;
+}
+
+@keyframes heroStatusBlinkBurgundy {
+  0%, 100% {
+    background: rgba(122, 43, 43, 0.07);
+    border-color: rgba(184, 84, 84, 0.5);
+    box-shadow: 0 0 32px rgba(122, 43, 43, 0.10);
+  }
+  50% {
+    background: rgba(122, 43, 43, 0.16);
+    border-color: rgba(184, 84, 84, 0.85);
+    box-shadow: 0 0 48px rgba(122, 43, 43, 0.20);
+  }
+}
+
+@media (max-width: 600px) {
+  .day-concluded-tag {
+    display: block;
+    margin-left: 0;
+    margin-top: 4px;
+    font-size: 0.92em;
+  }
+}
