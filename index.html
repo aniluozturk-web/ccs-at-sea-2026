@@ -102,6 +102,37 @@
   </div>
 </section>
 
+<!-- HIGHLIGHTS GALLERY -->
+<section class="section" id="highlights" style="padding-top: 30px;">
+  <div class="reveal" style="text-align: center;">
+    <div class="sec-label" style="color: var(--teal); text-align: center;">Moments from the Conference</div>
+    <h2 class="sec-title" style="color: var(--navy); text-align: center;">Highlights</h2>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <a class="gallery-item" href="01_IMG_2017.jpg" data-lightbox><img src="01_IMG_2017.jpg" alt="Conference highlight 1" loading="lazy"></a>
+    <a class="gallery-item" href="02_IMG_2340.jpg" data-lightbox><img src="02_IMG_2340.jpg" alt="Conference highlight 2" loading="lazy"></a>
+    <a class="gallery-item" href="03_IMG_2306.jpg" data-lightbox><img src="03_IMG_2306.jpg" alt="Conference highlight 3" loading="lazy"></a>
+    <a class="gallery-item" href="04_IMG_2343.jpg" data-lightbox><img src="04_IMG_2343.jpg" alt="Conference highlight 4" loading="lazy"></a>
+    <a class="gallery-item" href="05_IMG_1969.jpg" data-lightbox><img src="05_IMG_1969.jpg" alt="Conference highlight 5" loading="lazy"></a>
+    <a class="gallery-item" href="06_IMG_2008.jpg" data-lightbox><img src="06_IMG_2008.jpg" alt="Conference highlight 6" loading="lazy"></a>
+    <a class="gallery-item" href="07_IMG_1996.jpg" data-lightbox><img src="07_IMG_1996.jpg" alt="Conference highlight 7" loading="lazy"></a>
+    <a class="gallery-item" href="08_IMG_2275.jpg" data-lightbox><img src="08_IMG_2275.jpg" alt="Conference highlight 8" loading="lazy"></a>
+  </div>
+
+  <p class="reveal" style="text-align: center; margin-top: 28px; font-size: 0.88rem; color: var(--text-muted);">
+    Attendees: the full photo set is available in the <a href="attendees.html" style="color: var(--teal); text-decoration: none; border-bottom: 1px solid currentColor;">private gallery</a> (password required).
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous">&#10094;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next">&#10095;</button>
+</div>
+
 <!-- ABOUT -->
 <section class="section" id="about">
   <div class="reveal">
@@ -186,6 +217,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="assets/CCS_Book_of_Abstracts.pdf" target="_blank" rel="noopener">Book of Abstracts</a></li>
           <li><a href="practical.html">Publication</a></li>
+          <li><a href="attendees.html">For Attendees</a></li>
         </ul>
       </div>
 
@@ -262,6 +294,54 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// LIGHTBOX
+(function() {
+  const items = Array.from(document.querySelectorAll('[data-lightbox]'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const btnClose = document.getElementById('lightbox-close');
+  const btnPrev = document.getElementById('lightbox-prev');
+  const btnNext = document.getElementById('lightbox-next');
+  let current = 0;
+
+  function open(idx) {
+    current = idx;
+    lightboxImg.src = items[current].getAttribute('href');
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 250);
+  }
+  function show(delta) {
+    current = (current + delta + items.length) % items.length;
+    lightboxImg.src = items[current].getAttribute('href');
+  }
+
+  items.forEach((item, idx) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(idx);
+    });
+  });
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => show(-1));
+  btnNext.addEventListener('click', () => show(1));
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(-1);
+    if (e.key === 'ArrowRight') show(1);
+  });
+})();
 </script>
 
 </body>

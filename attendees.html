@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="CCS at Sea 2026 — private photo gallery for conference attendees.">
+  <meta name="theme-color" content="#4a1818">
+
+  <title>For Attendees | CCS at Sea 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">CCS <span>at Sea</span> 2026</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="programme.html">Programme</a>
+      <a href="speakers.html">Speakers</a>
+      <a href="practical.html">Publication</a>
+      <a href="about.html">About</a>
+      <a href="registration.html" class="nav-cta">Enquiry</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="programme.html">Programme</a>
+  <a href="speakers.html">Speakers</a>
+  <a href="practical.html">Publication</a>
+  <a href="about.html">About</a>
+  <a href="registration.html">Enquiry</a>
+</div>
+
+<!-- PASSWORD GATE -->
+<section class="gate" id="gate">
+  <div class="gate-card">
+    <div class="sec-label" style="color: var(--teal); text-align: center;">For Attendees</div>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; color: var(--navy); text-align: center; margin: 14px 0 12px;">Private Photo Gallery</h1>
+    <p style="text-align: center; color: var(--text-body); margin: 0 auto 28px; max-width: 480px;">This page contains the full set of conference photographs for attendees. Please enter the password shared with you to view and download.</p>
+
+    <form class="gate-form" id="gate-form" autocomplete="off">
+      <label for="gate-input" class="visually-hidden">Password</label>
+      <input type="password" id="gate-input" name="password" placeholder="Enter password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+      <button type="submit" class="btn btn-primary">Unlock</button>
+    </form>
+    <p class="gate-error" id="gate-error" aria-live="polite"></p>
+
+    <p style="text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 28px;">
+      Lost the password? <a href="registration.html" style="color: var(--teal);">Contact the organisers</a>.
+    </p>
+  </div>
+</section>
+
+<!-- GALLERY (hidden until unlocked) -->
+<main class="vault" id="vault" hidden>
+  <section class="section" style="padding-top: 110px;">
+    <div class="reveal visible" style="text-align: center; max-width: 760px; margin: 0 auto;">
+      <div class="sec-label" style="color: var(--teal); text-align: center;">For Attendees</div>
+      <h1 class="sec-title" style="color: var(--navy); text-align: center;">Conference Photo Gallery</h1>
+      <p style="color: var(--text-body); margin-top: 8px;">All <strong id="photo-count">92</strong> photographs from the conference. Click any photo to view it full-size; use the download button to save it. Please use these images for personal recollection and academic purposes only.</p>
+      <p style="margin-top: 16px;">
+        <button class="btn btn-outline" id="lock-btn" style="font-size: 0.78rem;">Lock gallery</button>
+      </p>
+    </div>
+
+    <div class="gallery-grid attendee-grid reveal visible" id="attendee-grid"></div>
+  </section>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous">&#10094;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <a class="lightbox-download" id="lightbox-download" href="" download aria-label="Download">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <span>Download</span>
+  </a>
+  <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next">&#10095;</button>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-bottom">
+      &copy; 2026 Faculty of Law, Lund University &amp; School of Business, Economics and Law, University of Gothenburg
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== Password gate =====
+// NOTE: This is client-side obscurity, not real security. Anyone determined can
+// inspect the page source or guess the file paths under /for_attendees/.
+// For a low-stakes attendee gallery this is fine; if you need real protection,
+// host the photos behind a server with HTTP Basic Auth or a signed-URL service.
+
+const PASSWORD_HASH = '491b0dfb05e0eb3e7a331dd8d5c82ba67a34dfc319170f57e2399669a5d625c1';
+const STORAGE_KEY = 'ccs2026-attendee-unlock';
+
+const PHOTOS = [
+  '001_IMG_2258.jpg','002_IMG_2259.jpg','003_IMG_2260.jpg','004_IMG_2261.jpg',
+  '005_IMG_2262.jpg','006_IMG_2263.jpg','007_IMG_2264.jpg','008_IMG_2265.jpg',
+  '009_IMG_2266.jpg','010_IMG_2267.jpg','011_IMG_2268.jpg','012_IMG_2269.jpg',
+  '013_IMG_1936.jpg','014_IMG_1937.jpg','015_IMG_1938.jpg','016_IMG_1941.jpg',
+  '017_IMG_1942.jpg','018_IMG_1944.jpg','019_IMG_1946.jpg','020_IMG_1950.jpg',
+  '021_IMG_1952.jpg','022_IMG_1954.jpg','023_IMG_1956.jpg','024_IMG_1959.jpg',
+  '025_IMG_1961.jpg','026_IMG_1962.jpg','027_IMG_1964.jpg','028_IMG_1965.jpg',
+  '029_IMG_1966.jpg','030_IMG_1969.jpg','031_IMG_1970.jpg','032_IMG_1972.jpg',
+  '033_IMG_1977.jpg','034_IMG_1978.jpg','035_IMG_1980.jpg','036_IMG_1987.jpg',
+  '037_IMG_1993.jpg','038_IMG_1996.jpg','039_IMG_1998.jpg','040_IMG_2001.jpg',
+  '041_IMG_2002.jpg','042_IMG_2004.jpg','043_IMG_2005.jpg','044_IMG_2007.jpg',
+  '045_IMG_2008.jpg','046_IMG_2009.jpg','047_IMG_2011.jpg','048_IMG_2013.jpg',
+  '049_IMG_2015.jpg','050_IMG_2017.jpg','051_IMG_2289.jpg','052_IMG_2290.jpg',
+  '053_IMG_2291.jpg','054_IMG_2292.jpg','055_IMG_2295.jpg','056_IMG_2296.jpg',
+  '057_IMG_2297.jpg','058_IMG_2298.jpg','059_IMG_2299.jpg','060_IMG_2300.jpg',
+  '061_IMG_2301.jpg','062_IMG_2302.jpg','063_IMG_2303.jpg','064_IMG_2304.jpg',
+  '065_IMG_2305.jpg','066_IMG_2306.jpg','067_IMG_2307.jpg','068_IMG_2308.jpg',
+  '069_IMG_2309.jpg','070_IMG_2311.jpg','071_IMG_2325.jpg','072_IMG_2326.jpg',
+  '073_IMG_2327.jpg','074_IMG_2328.jpg','075_IMG_2329.jpg','076_IMG_2330.jpg',
+  '077_IMG_2331.jpg','078_IMG_2332.jpg','079_IMG_2333.jpg','080_IMG_2334.jpg',
+  '081_IMG_2335.jpg','082_IMG_2337.jpg','083_IMG_2338.jpg','084_IMG_2339.jpg',
+  '085_IMG_2340.jpg','086_IMG_2341.jpg','087_IMG_2342.jpg','088_IMG_2343.jpg',
+  '089_IMG_2344.jpg','090_IMG_2345.jpg','091_IMG_2346.jpg','092_IMG_2347.jpg'
+];
+
+async function sha256Hex(str) {
+  const buf = new TextEncoder().encode(str);
+  const hashBuf = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+const gate = document.getElementById('gate');
+const vault = document.getElementById('vault');
+const form = document.getElementById('gate-form');
+const input = document.getElementById('gate-input');
+const errorEl = document.getElementById('gate-error');
+const lockBtn = document.getElementById('lock-btn');
+
+function buildGallery() {
+  const grid = document.getElementById('attendee-grid');
+  document.getElementById('photo-count').textContent = PHOTOS.length;
+  const frag = document.createDocumentFragment();
+  PHOTOS.forEach((file, idx) => {
+    const url = 'for_attendees/' + file;
+    const card = document.createElement('div');
+    card.className = 'attendee-card';
+
+    const link = document.createElement('a');
+    link.className = 'gallery-item';
+    link.href = url;
+    link.setAttribute('data-lightbox', '');
+    link.setAttribute('data-idx', idx);
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Conference photo ' + (idx + 1);
+    img.loading = 'lazy';
+    link.appendChild(img);
+
+    const dl = document.createElement('a');
+    dl.className = 'attendee-download';
+    dl.href = url;
+    dl.download = file;
+    dl.title = 'Download ' + file;
+    dl.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Save</span>';
+
+    card.appendChild(link);
+    card.appendChild(dl);
+    frag.appendChild(card);
+  });
+  grid.appendChild(frag);
+  initLightbox();
+}
+
+function unlock() {
+  gate.hidden = true;
+  vault.hidden = false;
+  document.body.classList.add('unlocked');
+  if (!document.getElementById('attendee-grid').children.length) {
+    buildGallery();
+  }
+}
+
+function lock() {
+  try { sessionStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  gate.hidden = false;
+  vault.hidden = true;
+  document.body.classList.remove('unlocked');
+  input.value = '';
+  errorEl.textContent = '';
+}
+
+// Auto-unlock if previously authenticated in this session
+try {
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+    unlock();
+  }
+} catch(e) {}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorEl.textContent = '';
+  const pwd = input.value.trim();
+  if (!pwd) return;
+  const hash = await sha256Hex(pwd);
+  if (hash === PASSWORD_HASH) {
+    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+    unlock();
+  } else {
+    errorEl.textContent = 'Incorrect password. Please check the message from the organisers.';
+    input.select();
+  }
+});
+
+lockBtn.addEventListener('click', lock);
+
+// ===== Navbar / mobile menu =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+});
+
+// ===== Lightbox =====
+function initLightbox() {
+  const items = Array.from(document.querySelectorAll('[data-lightbox]'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxDl = document.getElementById('lightbox-download');
+  const btnClose = document.getElementById('lightbox-close');
+  const btnPrev = document.getElementById('lightbox-prev');
+  const btnNext = document.getElementById('lightbox-next');
+  let current = 0;
+
+  function open(idx) {
+    current = idx;
+    const href = items[current].getAttribute('href');
+    lightboxImg.src = href;
+    lightboxDl.href = href;
+    lightboxDl.download = href.split('/').pop();
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 250);
+  }
+  function show(delta) {
+    current = (current + delta + items.length) % items.length;
+    const href = items[current].getAttribute('href');
+    lightboxImg.src = href;
+    lightboxDl.href = href;
+    lightboxDl.download = href.split('/').pop();
+  }
+
+  items.forEach((item, idx) => {
+    item.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
+  });
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => show(-1));
+  btnNext.addEventListener('click', () => show(1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(-1);
+    if (e.key === 'ArrowRight') show(1);
+  });
+}
+</script>
+
+</body>
+</html>
